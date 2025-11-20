@@ -80,7 +80,7 @@ contract ATokenVault is ERC4626Upgradeable, OwnableUpgradeable, EIP712Upgradeabl
         string memory shareName,
         string memory shareSymbol,
         uint256 initialLockDeposit
-    ) external initializer {
+    ) virtual external initializer {
         require(owner != address(0), "ZERO_ADDRESS_NOT_VALID");
         require(initialLockDeposit != 0, "ZERO_INITIAL_LOCK_DEPOSIT");
         _transferOwnership(owner);
@@ -522,7 +522,7 @@ contract ATokenVault is ERC4626Upgradeable, OwnableUpgradeable, EIP712Upgradeabl
         emit YieldAccrued(newYield, newFeesEarned, newVaultBalance);
     }
 
-    function _handleDeposit(uint256 assets, address receiver, address depositor, bool asAToken) internal returns (uint256) {
+    function _handleDeposit(uint256 assets, address receiver, address depositor, bool asAToken) virtual internal returns (uint256) {
         if (!asAToken) require(assets <= maxDeposit(receiver), "DEPOSIT_EXCEEDS_MAX");
         _accrueYield();
         uint256 shares = super.previewDeposit(assets);

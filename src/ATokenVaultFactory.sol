@@ -107,7 +107,7 @@ contract ATokenVaultFactory {
      * @param params All parameters needed for vault deployment and initialization
      * @return vault The address of the deployed vault proxy
      */
-    function deployVault(VaultParams memory params) public returns (address vault) {
+    function deployVault(VaultParams memory params) public virtual returns (address vault) {
         require(params.underlying != address(0), "ZERO_ADDRESS_NOT_VALID");
         require(address(params.poolAddressesProvider) != address(0), "ZERO_ADDRESS_NOT_VALID");
         require(params.owner != address(0), "ZERO_ADDRESS_NOT_VALID");
